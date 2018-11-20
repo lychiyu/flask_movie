@@ -1,8 +1,16 @@
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+
 from app.admin import admin as admin_blueprint
 from app.home import home as home_blueprint
 
 app = Flask(__name__)
+
+app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql://root:1234@127.0.0.1:3306/flask_movie'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = True
+
+db = SQLAlchemy(app)
+
 app.debug = True
 
 app.register_blueprint(home_blueprint)

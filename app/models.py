@@ -147,6 +147,10 @@ class Admin(db.Model):
     def __repr__(self):
         return self.name
 
+    def check_pwd(self, pwd):
+        from werkzeug.security import check_password_hash
+        return check_password_hash(self.password, pwd)
+
 
 class AdminLog(db.Model):
     """管理员登录日志"""
